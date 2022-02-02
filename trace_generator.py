@@ -253,11 +253,14 @@ class TraceGenerator():
             i += 1
 
         tm_now = int(time.time())
-        os.mkdir("OUTPUT/" + str(tm_now))
-        f = open("OUTPUT/" + str(tm_now) + "/gen_sequence.txt", "w")
 
-        with open("OUTPUT/" + str(tm_now) + "/command.txt", 'w') as fp:
-            fp.write('\n'.join(sys.argv[1:]))
+        tmp = self.args.traffic_classes.split(':')[0]+self.args.traffic_classes.split(':')[1][2:]
+        f = open("OUTPUT/" + self.args.traffic_classes.split(':')[0]+'-'+self.args.traffic_classes.split(':')[1]+'-'+self.args.traffic_ratio.split(':')[0]+':'+self.args.traffic_ratio.split(':')[1]+".txt", "w")
+        # os.mkdir("OUTPUT/" + str(tm_now))
+        # f = open("OUTPUT/" + str(tm_now) + "/gen_sequence.txt", "w")
+
+        # with open("OUTPUT/" + str(tm_now) + "/command.txt", 'w') as fp:
+        #     fp.write('\n'.join(sys.argv[1:]))
             
         ## Assign timestamp based on the byte-rate of the FD
         self.assign_timestamps(c_trace, sizes, fd.byte_rate, f)
