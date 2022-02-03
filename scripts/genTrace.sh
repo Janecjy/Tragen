@@ -10,5 +10,6 @@ for f in $FILES
         if [ $COUNT -eq 5 ]
             then
                 wait
+                COUNT=0
         fi
     done

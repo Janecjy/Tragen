@@ -1,4 +1,4 @@
 config/
-OUTPUT/
+OUTPUT/*
 *.out
 __pycache__
