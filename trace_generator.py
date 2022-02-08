@@ -254,8 +254,10 @@ class TraceGenerator():
 
         tm_now = int(time.time())
 
-        tmp = self.args.traffic_classes.split(':')[0]+self.args.traffic_classes.split(':')[1][2:]
-        f = open("OUTPUT/" + self.args.traffic_classes.split(':')[0]+'-'+self.args.traffic_classes.split(':')[1]+'-'+self.args.traffic_ratio.split(':')[0]+':'+self.args.traffic_ratio.split(':')[1]+".txt", "w")
+        if len(self.args.traffic_classes.split(':'))  == 2:
+            f = open("OUTPUT/" + self.args.traffic_classes.split(':')[0]+'-'+self.args.traffic_classes.split(':')[1]+'-'+self.args.traffic_ratio.split(':')[0]+':'+self.args.traffic_ratio.split(':')[1]+".txt", "w")
+        else:
+            f = open("OUTPUT/" + self.args.traffic_classes.split(':')[0]+'-'+self.args.traffic_ratio.split(':')[0]+".txt", "w")
         # os.mkdir("OUTPUT/" + str(tm_now))
         # f = open("OUTPUT/" + str(tm_now) + "/gen_sequence.txt", "w")
 
