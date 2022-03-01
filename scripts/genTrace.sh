@@ -5,7 +5,7 @@ FILES="$BASEDIR/config/*"
 COUNT=0
 for f in $FILES
     do
-        python tragen_cli.py -c $f > $COUNT.out &
+        python tragen_cli.py -c $f &
         ((COUNT++))
         if [ $COUNT -eq 4 ]
             then

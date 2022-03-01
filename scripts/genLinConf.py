@@ -12,8 +12,8 @@ def genConf(trace1, trace2, rate):
             if trace2 == l[1]:
                 t2_orig_req_rate = float(l[4])
     
-    req_rate_1 = math.floor(100*rate)
-    req_rate_2 = math.floor(100*(1-rate))
+    req_rate_1 = 100*rate
+    req_rate_2 = 100*(1-rate)
 
     data = {}
     data["Trace_length"] = "10000000"
@@ -29,12 +29,11 @@ def genConf(trace1, trace2, rate):
         "traffic_volume": str(math.floor(t2_orig_req_rate*req_rate_2))
     })
 
-    with open('config/tc-0-1-'+str(req_rate_1)+':'+str(req_rate_2)+'.config', 'w') as outfile:
+    with open('config/tc-0-1-'+str(math.floor(req_rate_1*10)/10)+':'+str(math.floor(req_rate_2*10)/10)+'.config', 'w') as outfile:
         json.dump(data, outfile, indent=4)
 
 # generate 100 TC-0 & TC-1 traffic mixtures
-for x in np.linspace(0, 1, 100):
-    if x > 0:
-        genConf("tc-0", "tc-1", x)
+for x in np.linspace(0, 1, 1000):
+    genConf("tc-0", "tc-1", x)
 
     
