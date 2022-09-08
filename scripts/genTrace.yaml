@@ -1,0 +1,11 @@
+hosts: [
+'amd002.utah.cloudlab.us', 
+'amd020.utah.cloudlab.us',
+'amd001.utah.cloudlab.us',
+'amd028.utah.cloudlab.us',
+'amd007.utah.cloudlab.us',
+'amd012.utah.cloudlab.us',
+'amd023.utah.cloudlab.us',
+]
+username: 'janechen'
+config_path: '/home/jane/Documents/Tragen/config'
