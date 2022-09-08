@@ -11,5 +11,6 @@ for f in $FILES
             then
                 wait
                 COUNT=0
+                mv OUTPUT/* /mydata/traces/
         fi
     done

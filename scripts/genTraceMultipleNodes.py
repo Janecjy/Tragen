@@ -41,7 +41,7 @@ def setup(host_id):
     rssh_object = ssh_hosts[host_id]
 
     # setup node
-    clone_cmd = "sudo apt-get update; sudo apt-get install -y python3.6; git clone git@github.com:Janecjy/Tragen.git; cd Tragen; mkdir config"
+    clone_cmd = "sudo apt-get update; sudo apt-get install -y python3.6; sudo chown -R janechen /mydata; mkdir -p /mydata/traces; git clone git@github.com:Janecjy/Tragen.git; cd Tragen; mkdir config"
     stdin, stdout, stderr = rssh_object.exec_command(clone_cmd, get_pty=True)
     for line in iter(stdout.readline, ""):
         print(line)
