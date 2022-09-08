@@ -7,7 +7,7 @@ for f in $FILES
     do
         python3 tragen_cli.py -c $f &
         ((COUNT++))
-        if [ $COUNT -eq 3 ]
+        if [ $COUNT -eq 4 ]
             then
                 wait
                 COUNT=0
