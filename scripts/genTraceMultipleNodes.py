@@ -41,7 +41,7 @@ def setup(host_id):
     rssh_object = ssh_hosts[host_id]
 
     # setup node
-    clone_cmd = "sudo apt-get update; sudo apt-get install -y python3.6; sudo chown -R janechen /mydata; mkdir -p /mydata/traces; git clone git@github.com:Janecjy/Tragen.git; cd Tragen; mkdir config"
+    clone_cmd = "sudo apt-get update; sudo apt-get install -y python3.6 libjpeg-dev zlib1g-dev; sudo apt-get install -y python3-pip; pip3 install numpy scipy PySide2 datetime matplotlib; ssh-keyscan github.com >> ~/.ssh/known_hosts; sudo chown -R janechen /mydata; mkdir -p /mydata/traces; git clone git@github.com:Janecjy/Tragen.git; cd Tragen; mkdir config"
     stdin, stdout, stderr = rssh_object.exec_command(clone_cmd, get_pty=True)
     for line in iter(stdout.readline, ""):
         print(line)
@@ -59,7 +59,7 @@ def copy_conf(host_id, start_conf_num, conf_num):
 def run(host_id):
     rssh_object = ssh_hosts[host_id]
 
-    run_cmd = "sudo pkill tragen_cli; chmod +x scripts/genTrace.sh; tmux new-session -d ./scripts/genTrace.sh"
+    run_cmd = "sudo pkill -9 -f genTrace.sh; sudo pkill -9 -f tragen_cli.py; cd Tragen; chmod +x scripts/genTrace.sh; tmux new-session -d ./scripts/genTrace.sh"
     stdin, stdout, stderr = rssh_object.exec_command(run_cmd, get_pty=True)
     for line in iter(stdout.readline, ""):
         print(line)
