@@ -9,24 +9,6 @@ ssh_hosts = []
 config_path = ''
 trace_conf_list = []
 
-def prepare_client_trace():
-    rssh_object = ssh_hosts[0]
-    clean_cmd = 'rm -rf client-'+trace+'-*.txt'
-    print(clean_cmd)
-    os.system(clean_cmd)
-    scp_cmd = "scp ~/Desktop/client-"+trace+".txt "+username+'@'+hosts[0]+":~/traces/"
-    print(scp_cmd)
-    os.system(scp_cmd)
-    split_cmd = 'split -d -nr/'+str(client_num)+' ~/traces/client-'+trace+'.txt ~/traces/client-'+trace+'-'
-    print(split_cmd)
-    stdin, stdout, stderr = rssh_object.exec_command(split_cmd, get_pty=True)
-    for line in iter(stdout.readline, ""):
-        print(line)
-    # for i in range(client_num):
-    #     scp_cmd = "scp "+username+'@'+hosts[0]+":~/traces/client-"+trace+'-'+'{:02d}'.format(i)+' '+username+'@'+hosts[i]+":~/traces/"
-    #     print(scp_cmd)
-    #     os.system(scp_cmd)
-
 def connect_rhost(rhost, username):
     rssh = paramiko.client.SSHClient()
     # rssh.load_system_host_keys()
@@ -51,7 +33,7 @@ def copy_conf(host_id, start_conf_num, conf_num):
     for i in range(conf_num):
         # print(start_conf_num+i)
         conf_name = trace_conf_list[start_conf_num+i]
-        scp_cmd = "scp "+config_path+"/"+conf_name+" "+username+'@'+hosts[host_id]+":~/Tragen/config/"
+        scp_cmd = "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "+config_path+"/"+conf_name+" "+username+'@'+hosts[host_id]+":~/Tragen/config/"
         print(scp_cmd)
         os.system(scp_cmd)
     
@@ -63,6 +45,8 @@ def run(host_id):
     print(run_cmd)
     stdin, stdout, stderr = rssh_object.exec_command(run_cmd, get_pty=True)
     for line in iter(stdout.readline, ""):
+        print(line)
+    for line in iter(stderr.readline, ""):
         print(line)
 
 
@@ -98,6 +82,3 @@ if __name__ == "__main__":
 
     for i in range(0, len(hosts)):
         run(i)
-
-
-    
