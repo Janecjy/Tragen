@@ -17,7 +17,7 @@ def genConf(trace1, trace2, t1_rate, scale):
     req_rate_2 = tot_req_rate*(1-t1_rate)
 
     data = {}
-    data["Trace_length"] = "100000000"
+    data["Trace_length"] = "10000000"
     data["Hitrate_type"] = "rhr"
     data["Input_unit"] = "reqs/s"
     data["Traffic_classes"] = []
@@ -36,5 +36,5 @@ def genConf(trace1, trace2, t1_rate, scale):
         json.dump(data, outfile, indent=4)
 
 # generate 100 TC-0 & TC-1 traffic mixtures
-for x in np.linspace(0, 1, 200):
-    genConf("tc-0", "tc-1", x, 2)
+for x in np.linspace(0, 1, 100):
+    genConf("tc-0", "tc-1", x, 1)
