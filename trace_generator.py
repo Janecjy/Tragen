@@ -254,7 +254,7 @@ class TraceGenerator():
 
         tm_now = int(time.time())
         
-        f = open(self.args.name, "w")
+        f = open("OUTPUT/"+self.args.name, "w")
 
         # if len(self.args.traffic_classes.split(':'))  == 2:
         #     f = open("OUTPUT/" + self.args.traffic_classes.split(':')[0]+'-'+self.args.traffic_classes.split(':')[1]+'-'+self.args.traffic_ratio.split(':')[0]+':'+self.args.traffic_ratio.split(':')[1]+".txt", "w")
