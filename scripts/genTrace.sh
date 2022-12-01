@@ -19,6 +19,7 @@ for f in $FILES
             fi
         done
     done
+wait
 mv OUTPUT/* /mydata/traces/
 rm -rf /mydata/traces/debug.txt
 rm -rf /mydata/traces/logfile.txt
